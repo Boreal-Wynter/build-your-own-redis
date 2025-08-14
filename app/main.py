@@ -8,6 +8,7 @@ def main():
     connection, _ = server_socket.accept()
 
     while connection:
+        # Wait for 'Ping'
         connection.recv(1024)
 
         # Send a 'Pong' Response
