@@ -4,8 +4,10 @@ import socket  # noqa: F401
 def main():
     # Create a server
     server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
-    # Wait for a client connection
-    connection, _ = server_socket.accept()
+
+    while True:
+        # Wait for a client connection
+        connection, _ = server_socket.accept()
 
     while connection:
         # Wait for 'Ping'
