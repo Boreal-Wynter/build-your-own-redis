@@ -6,11 +6,11 @@ def main():
     server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
     # Wait for a client connection
     connection, _ = server_socket.accept()
-
+    test = connection.listen()
+    print(f"wtf am i doing??? {test}")
     while connection:
         # Wait for 'Ping'
         connection.recv(1024)
-
         # Send a 'Pong' Response
         connection.sendall(b"+PONG\r\n")
 
