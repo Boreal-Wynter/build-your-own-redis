@@ -1,18 +1,24 @@
 import socket  # noqa: F401
+import threading
+
+
+def test(server_socket):
+    # Wait for a client connection
+    connection, _ = server_socket.accept()
+    while connection:
+        # Wait for 'Ping'
+        connection.recv(1024)
 
 
 def main():
     # Create a server
     server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
-    # Wait for a client connection
-    connection, _ = server_socket.accept()
 
-    while connection:
-        # Wait for 'Ping'
-        connection.recv(1024)
+    thread1 = threading.Thread(target=test(server_socket)).start()
+    thread2 = threading.Thread(target=test(server_socket)).start()
 
-        # Send a 'Pong' Response
-        connection.sendall(b"+PONG\r\n")
+    thread1.join()
+    thread2.join()
 
 
 if __name__ == "__main__":
