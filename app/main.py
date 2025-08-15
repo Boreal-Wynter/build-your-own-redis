@@ -9,6 +9,11 @@ def pong_client(connection):
         # Decode ping
         decoded_ping = str(ping)
         ping_list = decoded_ping.split("\\r\\n")
+
+        # DEBUG
+        print(f"string: {decoded_ping}")
+        print(f"list: {ping_list}")
+
         # If client 'PINGS'
         if "PING" in ping_list:
             # Send a 'Pong' Response
